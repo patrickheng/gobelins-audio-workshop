@@ -1,8 +1,8 @@
 import EmitterBase from './EmitterBase';
-import Smoke from './Smoke';
+import Line from './Line';
 import NumberUtils from '../utils/number-utils';
 
-export default class SmokeEmitter extends EmitterBase {
+export default class LineEmitter extends EmitterBase {
 
     /**
      * @constructor 
@@ -16,7 +16,7 @@ export default class SmokeEmitter extends EmitterBase {
         this.scene = scene;
         this.particlesNumber = particuleNb;
 
-        this.populate(Smoke, 1000);
+        this.populate(Line, 1000);
 
         this.throw(this.particlesNumber);
     }
@@ -46,6 +46,7 @@ export default class SmokeEmitter extends EmitterBase {
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
+
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
 
@@ -69,6 +70,7 @@ export default class SmokeEmitter extends EmitterBase {
             } else {
                 this.particles[i].update(dt, audioData);
             }
+
         }
     }
 }

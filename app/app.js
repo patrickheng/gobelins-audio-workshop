@@ -7,7 +7,8 @@ import {
 from 'pixi.js';
 import NumberUtils from './utils/number-utils';
 import SmokeEmitter from './lib/SmokeEmitter';
-import Circle from './lib/Circle';
+import LineEmitter from './lib/LineEmitter';
+import Stars from './lib/Stars';
 import Stats from 'stats-js'
 
 
@@ -18,31 +19,40 @@ class App {
      */
     constructor() {
 
+        this.ENV = 'DEV';
+
+        // Calculate time
         this.DELTA_TIME = 0;
         this.LAST_TIME = Date.now();
 
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
+        // Init base classes
         this.scene = new Scene();
         this.audio = new AudioW('/audio/Ueno.mp3');
-        this.audioIndex = 10;
 
+        // Render pixi view
         let root = document.body.querySelector('.app');
         root.appendChild(this.scene.renderer.view);
 
-        this.audioDataEl = 100;
+        // Child of scene 
+        this.smokeEmitter = new SmokeEmitter(this.scene, 50);
+        this.lineEmitter = new LineEmitter(this.scene, 50);
+        this.stars = new Stars(this.scene);
 
-        this.smokeEmitter = new SmokeEmitter(this.scene, this.audioDataEl);
-        this.circle = new Circle(this.scene);
-        this.scene.addChild(this.circle);
+        // Add in scene
+        this.scene.addChild(this.stars);
 
         this.addListeners();
 
         this.statsReady = false;
-        this.addStats();
-        this.addGui();
 
+        // Init dev tools
+        if(this.ENV === 'DEV') {
+          this.addStats();
+          this.addGui();
+        }
     }
 
     /**
@@ -70,7 +80,7 @@ class App {
      */
     addGui() {
         this.gui = new Dat.GUI();
-        this.gui.add(this, 'audioIndex').min(1).max(300);
+        // this.gui.add(this, 'audioIndex').min(1).max(300);
     }
 
     /**
@@ -96,11 +106,17 @@ class App {
         this.DELTA_TIME = Date.now() - this.LAST_TIME;
         this.LAST_TIME = Date.now();
 
-        const audioData = this.audio.getFrequencyBars(this.audioDataEl, 400);
+        // Get audio data
+        const audioData = this.audio.getFrequencyBars(50, 400);
+        const averageAudioData = this.audio.getAverageFrequency();
 
-        this.smokeEmitter.update(this.DELTA_TIME, audioData);
-        this.circle.update(this.DELTA_TIME, audioData[this.audioIndex]);
+        // Update children
+        this.smokeEmitter.update(this.DELTA_TIME, audioData[30]);
+        this.lineEmitter.update(this.DELTA_TIME, audioData[10]);
 
+        this.stars.update(averageAudioData);
+
+        // Render
         this.scene.render();
 
         if (this.statsReady)

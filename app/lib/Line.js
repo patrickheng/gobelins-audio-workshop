@@ -19,11 +19,11 @@ export default class Smoke extends Sprite {
         this.isDead = false;
 
         this.velocity = {
-            x: NumberUtils.randomRange(-3, 3),
-            y: NumberUtils.randomRange(-3, 3)
+            x: NumberUtils.randomRange(-10, 10),
+            y: NumberUtils.randomRange(-10, 10)
         };
 
-        this.textures = ['img/cloud700.png'];
+        this.textures = ['img/line.png'];
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
         this.y = Math.sin(this.angle) * 100 + window.innerHeight / 2;
@@ -79,10 +79,10 @@ export default class Smoke extends Sprite {
         this.life -= dt;
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
-        this.y += this.velocity.y;
+        this.y += this.velocity.y * audioData / 25;
 
         this.alpha = 1 - this.life / this.baseLife - 0.3;
-        this.scaleVal = audioData / 60;
+        this.scaleVal = audioData / 40;
         this.scale.set(this.scaleVal);
 
     }
