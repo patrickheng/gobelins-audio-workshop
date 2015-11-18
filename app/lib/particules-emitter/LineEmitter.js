@@ -1,6 +1,6 @@
 import EmitterBase from './EmitterBase';
-import Line from './Line';
-import NumberUtils from '../utils/number-utils';
+import Line from '../Line';
+import NumberUtils from '../../utils/number-utils';
 
 export default class LineEmitter extends EmitterBase {
 

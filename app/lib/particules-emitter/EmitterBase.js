@@ -1,4 +1,4 @@
-import NumberUtils from '../utils/number-utils';
+import NumberUtils from '../../utils/number-utils';
 
 export default class EmmiterBase {
 
