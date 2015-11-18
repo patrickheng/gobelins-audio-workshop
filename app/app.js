@@ -105,7 +105,6 @@ class App {
 
         if (this.statsReady)
             this.stats.end();
-
     }
 
     /**

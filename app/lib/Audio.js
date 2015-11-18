@@ -62,9 +62,9 @@ export default class AudioAnalyzer {
     }
 
     /**
+     * @method
      * @name getFrequencyData
      * @description Get data of the sound which is playing
-     * @method
      * @return {array} - Frenquency data array
      */
     getFrequencyData() {
@@ -75,9 +75,9 @@ export default class AudioAnalyzer {
     }
 
     /**
+     * @method
      * @name getAverageFrequency
      * @description Get the average frequency with poundaration of each frequency
-     * @method
      * @return {float} - Frenquency average
      */
     getAverageFrequency() {

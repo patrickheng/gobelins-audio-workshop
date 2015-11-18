@@ -17,9 +17,9 @@ export default class EmmiterBase {
     }
 
     /**
+     * @method
      * @name populate
      * @description Populate the pool of the emitter
-     * @method
      * @param {class} classEl - The class of the particule
      * @param {integer} poolLength -  Number of index in the pool
      */
@@ -31,9 +31,9 @@ export default class EmmiterBase {
     }
 
     /**
+     * @method
      * @name takeFromPool
      * @description Take a particule from the pool
-     * @method
      * @return {object} - Object from pool
      */
     takeFromPool() {

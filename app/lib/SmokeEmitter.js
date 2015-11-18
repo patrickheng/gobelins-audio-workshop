@@ -22,9 +22,9 @@ export default class SmokeEmitter extends EmitterBase {
     }
 
     /**
+     * @method
      * @name throw
      * @description Instance particules
-     * @method
      * @param {integer} number - Number of thrown particules
      */
     throw (number) {
@@ -39,9 +39,9 @@ export default class SmokeEmitter extends EmitterBase {
     }
 
     /**
+     * @method
      * @name reset
      * @description Update called by a request animation frame
-     * @method
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
      */

@@ -28,8 +28,8 @@ export default class Circle extends Graphics {
     this.clear();
     for (let i = 0; i < 100; i++) {
 
-      this.beginFill(0xa66bbe, 0.2);
-      this.drawCircle(NumberUtils.randomRange(-window.innerWidth, window.innerWidth),  NumberUtils.randomRange(-window.innerHeight, window.innerHeight), 5);
+      this.beginFill(0xFFFFFF, 0.2);
+      this.drawCircle(NumberUtils.randomRange(-window.innerWidth, window.innerWidth),  NumberUtils.randomRange(-window.innerHeight, window.innerHeight), 2);
       
     };
   }

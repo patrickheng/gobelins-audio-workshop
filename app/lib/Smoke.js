@@ -41,9 +41,9 @@ export default class Smoke extends Sprite {
     }
 
     /**
+     * @method
      * @name reset
      * @description Reset a particule, used after use a old particule from pool
-     * @method
      * @param {object} velocity - X/Y velocity
      */
     reset(velocity) {
@@ -66,9 +66,9 @@ export default class Smoke extends Sprite {
     }
 
     /**
+     * @method
      * @name reset
      * @description Update called by a request animation frame
-     * @method
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
      */
