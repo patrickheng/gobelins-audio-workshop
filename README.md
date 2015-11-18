@@ -1,5 +1,6 @@
-# Gobelins audio workshop
-
+# [WIP] Gobelins audio workshop 
+WORK IN PROGRESS :)
+----
 It's a student exercice made at Gobelins. 
 We had 3 days for using Pixi.js + the web audio api for make a creative animation.
 
