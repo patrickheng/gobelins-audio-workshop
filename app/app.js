@@ -16,7 +16,7 @@ import Stats from 'stats-js';
 class App {
 
     /**
-     * @constructor 
+     * @constructor
      */
     constructor() {
 
@@ -37,13 +37,13 @@ class App {
         let root = document.body.querySelector('.app');
         root.appendChild(this.scene.renderer.view);
 
-        // Child of scene 
+        // Child of scene
         this.smokeEmitter = new SmokeEmitter(this.scene, 50);
         this.lineEmitter = new LineEmitter(this.scene, 50);
         this.ringEmitter = new RingEmitter(this.scene);
         this.octogoneEmitter = new OctogoneEmitter(this.scene);
         this.stars = new Stars(this.scene);
-      
+
 
         // Add in scene
         this.scene.addChild(this.stars);
@@ -84,7 +84,7 @@ class App {
      */
     addGui() {
         this.gui = new Dat.GUI();
-        // this.gui.add(this, 'audioIndex').min(1).max(300);
+        this.gui.add(this.audio.audioEl, 'currentTime').min(0).max(240).step(10).name('go to time');
     }
 
     /**

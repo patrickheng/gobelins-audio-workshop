@@ -39,8 +39,8 @@
     }
 
     /**
-     * @name loadSound
      * @method
+     * @name loadSound
      * @description Load the audio source asynchroniously
      */
     canPlayThrough() {
@@ -55,6 +55,16 @@
 
         // Play the song
         this.audioEl.play();
+    }
+
+    /**
+     * @method
+     * @name setGui
+     * @param {object} gui - Instance of dat.GUI
+     * @description Set dat gui options for audio folder
+     */
+    setGui(gui) {
+
     }
 
     /**
@@ -93,9 +103,9 @@
     }
 
     /**
+     * @method
      * @name getFrequencyBars
      * @description Get an array of data of the sound currently playing sliced and recalculated value
-     * @method
      * @param {integer} nbfOfBars - Numbers of index return
      * @param {integer} sliceN -  Offset from end, index to be ignore of returned array
      * @return {array} - Frenquency data array
