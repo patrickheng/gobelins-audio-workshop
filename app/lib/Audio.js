@@ -1,14 +1,24 @@
-export default class AudioAnalyzer {
+    export default class AudioAnalyzer {
 
     /**
-     * @constructor 
+     * @constructor
      * @param {string} soundUrl - Url of the audio source
      */
     constructor(soundUrl) {
-        this.audioCtx = new AudioContext();
+        this.audioEl = new Audio();
+        this.audioEl.controls = false;
+        this.audioEl.crossOrigin = "anonymous";
+        this.audioEl.loop = true;
+        this.audioEl.autoplay = true;
 
         this.soundUrl = soundUrl;
+        this.audioEl.src = this.soundUrl;
+        this.audioEl.pause();
 
+        // Add can play through
+        this.audioEl.addEventListener('canplaythrough', this.canPlayThrough.bind(this));
+
+        this.audioCtx = new AudioContext();
         this.analyser = this.audioCtx.createAnalyser();
 
         this.analyser.smoothingTimeConstant = 0.9;
@@ -26,7 +36,6 @@ export default class AudioAnalyzer {
         this.audioBuffer;
         this.audioSource;
 
-        this.loadSound();
     }
 
     /**
@@ -34,32 +43,18 @@ export default class AudioAnalyzer {
      * @method
      * @description Load the audio source asynchroniously
      */
-    loadSound() {
-        let request = new XMLHttpRequest();
-        request.open('GET', this.soundUrl, true);
-        request.responseType = 'arraybuffer';
+    canPlayThrough() {
 
-        request.onload = () => {
-            this.soundLoaded = true;
-            this.audioCtx.decodeAudioData(request.response, (buffer) => {
-                // success callback
-                this.audioBuffer = buffer;
-                // Create sound from buffer
-                this.audioSource = this.audioCtx.createBufferSource();
-                this.audioSource.buffer = this.audioBuffer;
+        // Connected audio pipe
+        this.audioSource = this.audioCtx.createMediaElementSource(this.audioEl);
 
-                // Base
-                this.audioSource.connect(this.analyser);
-                this.analyser.connect(this.audioCtx.destination);
+        this.audioSource.connect(this.analyser);
+        this.analyser.connect(this.audioCtx.destination);
 
-                // play sound
-                this.audioSource.loop = true;
-                this.audioSource.start(0);
-            }, function() {
-                // error callback
-            });
-        }
-        request.send();
+        this.soundLoaded = true;
+
+        // Play the song
+        this.audioEl.play();
     }
 
     /**
