@@ -7,6 +7,7 @@ import SmokeEmitter from './lib/particules-emitter/SmokeEmitter';
 import LineEmitter from './lib/particules-emitter/LineEmitter';
 import OctogoneEmitter from './lib/particules-emitter/OctogoneEmitter';
 import Stars from './lib/particules/Stars';
+import Constant from './config/Constant';
 
 // Only dev
 import Dat from 'dat-gui';
@@ -31,7 +32,7 @@ class App {
 
         // Init base classes
         this.scene = new Scene();
-        this.audio = new AudioW('/audio/Ueno.mp3');
+        this.audio = new AudioW('./audio/Ueno.mp3');
         this.toggleAudio = true;
 
         this.timeline = new Timeline(this.audio.audioEl);
@@ -131,13 +132,6 @@ class App {
         this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
         this.stars.update(averageAudioData);
 
-
-        // if(currentTime > 33) {
-        //     this.lineEmitter.popFrequency = 1;
-        //     this.lineEmitter.thrownElements = 10;
-        //     if(this.smokeEmitter.particules <= (50) {
-        //     }
-        // }
         // Render
         this.scene.render();
 

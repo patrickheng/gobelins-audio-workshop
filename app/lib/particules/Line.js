@@ -72,7 +72,13 @@ export default class Line extends Sprite {
         this.life -= dt;
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
-        this.y += this.velocity.y * audioData / 20;
+
+        if(audioData < 80) {
+            this.y += this.velocity.y * audioData / 20;
+        } else {
+            this.y += this.velocity.y * audioData / 5;
+            this.x += 1;
+        }
 
         // this.rotation += audioData / 10000;
         if(state === 'INTRO_START') {

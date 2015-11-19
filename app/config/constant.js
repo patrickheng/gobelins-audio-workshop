@@ -1,4 +1,5 @@
 const Constant = {
+  'ENV' : 'PROD',
 
   'INTRO_END' : 29,
   'MAIN_MELODY' : 32

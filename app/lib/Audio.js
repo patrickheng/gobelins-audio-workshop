@@ -59,16 +59,6 @@
 
     /**
      * @method
-     * @name setGui
-     * @param {object} gui - Instance of dat.GUI
-     * @description Set dat gui options for audio folder
-     */
-    setGui(gui) {
-
-    }
-
-    /**
-     * @method
      * @name getFrequencyData
      * @description Get data of the sound which is playing
      * @return {array} - Frenquency data array

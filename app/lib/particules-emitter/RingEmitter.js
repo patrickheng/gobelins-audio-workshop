@@ -19,7 +19,7 @@ export default class RingEmitter extends EmitterBase {
         this.populate(Ring, 500);
         this.currentTime = 0;
         this.minTriggerAmp = 100;
-        this.maxTick = 20;
+        this.maxTick = 13;
     }
 
     /**

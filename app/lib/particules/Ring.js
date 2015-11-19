@@ -27,6 +27,8 @@ export default class Ring extends Sprite {
         this.scaleVal = 0;
 
         this.texture = PIXI.Texture.fromImage('img/circle-thin.png');
+
+        this.blendMode = PIXI.BLEND_MODES.ADD;
     }
 
     /**
@@ -58,6 +60,12 @@ export default class Ring extends Sprite {
         if (this.life < 0.2) {
             this.isDead = true;
             return;
+        }
+
+        if(audioData < 100) {
+            this.tint = 0x1abc9c;
+        } else {
+            this.tint = 0xc0392b;
         }
 
         this.scaleVal += 0.005 ;
