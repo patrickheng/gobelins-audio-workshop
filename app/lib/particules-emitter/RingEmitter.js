@@ -1,5 +1,5 @@
 import EmitterBase from './EmitterBase';
-import Ring from '../Ring';
+import Ring from '../particules/Ring';
 import NumberUtils from '../../utils/number-utils';
 
 export default class RingEmitter extends EmitterBase {

@@ -1,6 +1,5 @@
 import { Sprite } from 'pixi.js';
-import NumberUtils from '../utils/number-utils';
-
+import NumberUtils from '../../utils/number-utils';
 
 export default class Ring extends Sprite {
 

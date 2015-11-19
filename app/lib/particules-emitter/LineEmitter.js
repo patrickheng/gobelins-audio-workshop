@@ -1,7 +1,7 @@
 import Constant from '../../config/constant';
 import EmitterBase from './EmitterBase';
 import EventEmitter from '../EventEmitter';
-import Line from '../Line';
+import Line from '../particules/Line';
 import NumberUtils from '../../utils/number-utils';
 
 export default class LineEmitter extends EmitterBase {

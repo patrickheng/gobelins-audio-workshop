@@ -6,8 +6,7 @@ import RingEmitter from './lib/particules-emitter/RingEmitter';
 import SmokeEmitter from './lib/particules-emitter/SmokeEmitter';
 import LineEmitter from './lib/particules-emitter/LineEmitter';
 import OctogoneEmitter from './lib/particules-emitter/OctogoneEmitter';
-import TriangleEmitter from './lib/particules-emitter/TriangleEmitter';
-import Stars from './lib/Stars';
+import Stars from './lib/particules/Stars';
 
 // Only dev
 import Dat from 'dat-gui';
@@ -44,7 +43,6 @@ class App {
         // Child of the scene
         this.smokeEmitter = new SmokeEmitter(this.scene, 5);
         this.lineEmitter = new LineEmitter(this.scene, 10);
-        this.triangleEmitter = new TriangleEmitter(this.scene, 30);
         this.ringEmitter = new RingEmitter(this.scene);
         this.octogoneEmitter = new OctogoneEmitter(this.scene);
         this.stars = new Stars(this.scene);

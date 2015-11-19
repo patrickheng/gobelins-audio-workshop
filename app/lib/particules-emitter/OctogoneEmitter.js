@@ -1,5 +1,5 @@
 import EmitterBase from './EmitterBase';
-import Octogone from '../Octogone';
+import Octogone from '../particules/Octogone';
 import NumberUtils from '../../utils/number-utils';
 
 export default class OctogoneEmitter extends EmitterBase {

@@ -1,7 +1,7 @@
 import Constant from '../../config/constant';
 import EmitterBase from './EmitterBase';
 import EventEmitter from '../EventEmitter';
-import Smoke from '../Smoke';
+import Smoke from '../particules/Smoke';
 import NumberUtils from '../../utils/number-utils';
 
 export default class SmokeEmitter extends EmitterBase {

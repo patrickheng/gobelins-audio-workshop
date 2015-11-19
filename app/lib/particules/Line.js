@@ -1,8 +1,8 @@
 import {Sprite} from 'pixi.js';
-import NumberUtils from '../utils/number-utils';
+import NumberUtils from '../../utils/number-utils';
 
 
-export default class Triangle extends Sprite {
+export default class Line extends Sprite {
 
     /**
      * @constructor
@@ -13,22 +13,24 @@ export default class Triangle extends Sprite {
 
         this.angle = NumberUtils.randomRange(-Math.PI, Math.PI);
 
-        this.baseLife = NumberUtils.randomRange(1000, 3000);
+        this.baseLife = NumberUtils.randomRange(4000, 5000);
         this.life = this.baseLife;
 
         this.isDead = false;
 
         this.velocity = {
-            x: NumberUtils.randomRange(-10, 10),
-            y: NumberUtils.randomRange(-10, 10)
+            x: NumberUtils.randomRange(-2, 2),
+            y: NumberUtils.randomRange(-2, 2)
         };
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
         this.y = Math.sin(this.angle) * 100 + window.innerHeight / 2;
-        this.alpha = 0;
+
         this.scaleVal = 0;
         this.rotation = this.angle;
-        this.texture = PIXI.Texture.fromImage('img/triangle.png');
+        this.alpha = 0.8;
+
+        this.texture = PIXI.Texture.fromImage(['img/line.png']);
     }
 
     /**
@@ -43,40 +45,44 @@ export default class Triangle extends Sprite {
         this.isDead = false;
 
         this.scaleVal = 0;
-        this.rotationSpeed = 0.01;
-        this.alpha = 0;
+        this.scale.set(this.scaleVal);
 
         this.angle = NumberUtils.randomRange(-Math.PI, Math.PI);
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
         this.y = Math.sin(this.angle) * 100 + window.innerHeight / 2;
+
     }
 
     /**
      * @method
-     * @name update
+     * @name reset
      * @description Update called by a request animation frame
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
+     * @param {string} state - Current part of the song
      */
-    update(dt, audioData) {
-
-        if(audioData > 100) {
-            this.scaleVal = audioData / 100;
-        } else {
-            this.scaleVal = audioData / 200;
-            this.alpha = 1 - this.life / this.baseLife - 0.4;
-        }
+    update(dt, audioData, state) {
 
         if (this.life < 0.2) {
             this.isDead = true;
             return;
         }
 
-        this.scale.set(this.scaleVal);
+        this.alpha = 1 - this.life / this.baseLife - 0.3;
         this.life -= dt;
-        this.alpha = 1 - this.life / this.baseLife - 0.7;
-        this.rotation += this.rotationSpeed;
 
+        this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
+        this.y += this.velocity.y * audioData / 20;
+
+        // this.rotation += audioData / 10000;
+        if(state === 'INTRO_START') {
+            this.scaleVal = audioData / 50;
+        }
+        else {
+            this.scaleVal = audioData / 35;
+        }
+
+        this.scale.set(this.scaleVal);
 
     }
 
