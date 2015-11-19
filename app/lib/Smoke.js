@@ -30,9 +30,7 @@ export default class Smoke extends Sprite {
 
         this.scaleVal = 0;
         this.rotation = this.angle;
-        // this.blendMode = PIXI.BLEND_MODES.ADD;
         this.alpha = 0.8;
-        // this.tint = Math.random() * 0xFFFFFF;
 
         // this.texture = PIXI.Texture.fromImage(this.textures[Math.floor(Math.random() * this.textures.length)]);
         this.texture = PIXI.Texture.fromImage(this.textures[0]);

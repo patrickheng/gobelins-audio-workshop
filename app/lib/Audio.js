@@ -53,7 +53,8 @@ export default class AudioAnalyzer {
                 this.analyser.connect(this.audioCtx.destination);
 
                 // play sound
-                this.audioSource.start();
+                this.audioSource.loop = true;
+                this.audioSource.start(0);
             }, function() {
                 // error callback
             });

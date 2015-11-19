@@ -29,7 +29,7 @@ export default class EmmiterBase {
             this.pool.push(p);
         };
     }
-
+    
     /**
      * @method
      * @name takeFromPool

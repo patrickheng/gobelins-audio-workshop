@@ -1,8 +1,8 @@
 import EmitterBase from './EmitterBase';
-import Smoke from '../Smoke';
+import Octogone from '../Octogone';
 import NumberUtils from '../../utils/number-utils';
 
-export default class SmokeEmitter extends EmitterBase {
+export default class OctogoneEmitter extends EmitterBase {
 
     /**
      * @constructor 
@@ -16,9 +16,8 @@ export default class SmokeEmitter extends EmitterBase {
         this.scene = scene;
         this.particlesNumber = particuleNb;
 
-        this.populate(Smoke, 1000);
-
-        this.throw(this.particlesNumber);
+        this.populate(Octogone, 500);
+        this.minTrigger = 150;
     }
 
     /**
@@ -46,29 +45,24 @@ export default class SmokeEmitter extends EmitterBase {
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
+
+        if(audioData > this.minTrigger) {
+            this.throw(1);
+        }
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
 
                 // Remove child
                 this.scene.removeChild(this.particles[i]);
 
-                // Take a new particules from pool
-                this.particles[i] = this.takeFromPool();
-
-                // Set new options of the particule
-                const velocity = {
-                    x: NumberUtils.randomRange(-3, 3),
-                    y: NumberUtils.randomRange(-3, 3)
-                }
-
-                this.particles[i].reset(velocity);
-
-                // Add the new particule in the scene
-                this.scene.addChild(this.particles[i]);
+                this.particles[i].reset();
 
             } else {
+                
+
                 this.particles[i].update(dt, audioData);
             }
+
         }
     }
 }

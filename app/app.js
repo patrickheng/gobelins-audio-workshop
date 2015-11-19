@@ -1,15 +1,16 @@
-import Dat from 'dat-gui';
 import Scene from './scene/scene';
 import AudioW from './lib/Audio'
-import {
-    Graphics
-}
-from 'pixi.js';
 import NumberUtils from './utils/number-utils';
-import SmokeEmitter from './lib/SmokeEmitter';
-import LineEmitter from './lib/LineEmitter';
+import RingEmitter from './lib/particules-emitter/RingEmitter';
+import SmokeEmitter from './lib/particules-emitter/SmokeEmitter';
+import LineEmitter from './lib/particules-emitter/LineEmitter';
+import OctogoneEmitter from './lib/particules-emitter/OctogoneEmitter';
 import Stars from './lib/Stars';
-import Stats from 'stats-js'
+
+
+// Only dev
+import Dat from 'dat-gui';
+import Stats from 'stats-js';
 
 
 class App {
@@ -39,7 +40,10 @@ class App {
         // Child of scene 
         this.smokeEmitter = new SmokeEmitter(this.scene, 50);
         this.lineEmitter = new LineEmitter(this.scene, 50);
+        this.ringEmitter = new RingEmitter(this.scene);
+        this.octogoneEmitter = new OctogoneEmitter(this.scene);
         this.stars = new Stars(this.scene);
+      
 
         // Add in scene
         this.scene.addChild(this.stars);
@@ -111,8 +115,10 @@ class App {
         const averageAudioData = this.audio.getAverageFrequency();
 
         // Update children
+        this.ringEmitter.update(this.DELTA_TIME, audioData[30]);
         this.smokeEmitter.update(this.DELTA_TIME, audioData[30]);
         this.lineEmitter.update(this.DELTA_TIME, audioData[10]);
+        this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
 
         this.stars.update(averageAudioData);
 

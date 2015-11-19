@@ -27,7 +27,7 @@ export default class LineEmitter extends EmitterBase {
      * @description Instance particules
      * @param {integer} number - Number of thrown particules
      */
-    throw (number) {
+    throw(number) {
         for (let i = 0; i < number; i++) {
 
             const p = this.takeFromPool();

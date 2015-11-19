@@ -1,8 +1,8 @@
 import EmitterBase from './EmitterBase';
-import Dot from '../Dot';
+import Ring from '../Ring';
 import NumberUtils from '../../utils/number-utils';
 
-export default class DotEmitter extends EmitterBase {
+export default class RingEmitter extends EmitterBase {
 
     /**
      * @constructor 
@@ -16,9 +16,8 @@ export default class DotEmitter extends EmitterBase {
         this.scene = scene;
         this.particlesNumber = particuleNb;
 
-        this.populate(Dot, 1000);
-
-        this.throw(this.particlesNumber);
+        this.populate(Ring, 500);
+        this.minTrigger = 100;
     }
 
     /**
@@ -27,7 +26,7 @@ export default class DotEmitter extends EmitterBase {
      * @description Instance particules
      * @param {integer} number - Number of thrown particules
      */
-    throw (number) {
+    throw(number) {
         for (let i = 0; i < number; i++) {
 
             const p = this.takeFromPool();
@@ -47,27 +46,20 @@ export default class DotEmitter extends EmitterBase {
      */
     update(dt, audioData) {
 
+        if(audioData > this.minTrigger) {
+            this.throw(1);
+        }
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
 
                 // Remove child
                 this.scene.removeChild(this.particles[i]);
 
-                // Take a new particules from pool
-                this.particles[i] = this.takeFromPool();
-
-                // Set new options of the particule
-                const velocity = {
-                    x: NumberUtils.randomRange(-3, 3),
-                    y: NumberUtils.randomRange(-3, 3)
-                }
-
-                this.particles[i].reset(velocity);
-
-                // Add the new particule in the scene
-                this.scene.addChild(this.particles[i]);
+                this.particles[i].reset();
 
             } else {
+                
+
                 this.particles[i].update(dt, audioData);
             }
 
