@@ -3,7 +3,7 @@ import NumberUtils from '../../utils/number-utils';
 export default class EmmiterBase {
 
     /**
-     * @constructor 
+     * @constructor
      * @param {object} scene - The current scene of Pixi
      * @param {integer} particuleNb - Number of particule to be instancieted
      */
@@ -29,7 +29,24 @@ export default class EmmiterBase {
             this.pool.push(p);
         };
     }
-    
+
+    /**
+     * @method
+     * @name throw
+     * @description Instance particules
+     * @param {integer} number - Number of thrown particules
+     */
+    throw(number) {
+        for (let i = 0; i < number; i++) {
+
+            const p = this.takeFromPool();
+
+            this.particles.push(p);
+
+            this.scene.addChild(p);
+        }
+    }
+
     /**
      * @method
      * @name takeFromPool
@@ -37,12 +54,7 @@ export default class EmmiterBase {
      * @return {object} - Object from pool
      */
     takeFromPool() {
-
-        if (this.poolIndex >= this.pool.length - 1) {
-            this.poolIndex = 0;
-        } else {
-            this.poolIndex++;
-        }
+        this.poolIndex = (this.poolIndex >= this.pool.length - 1) ? 0 : this.poolIndex+1;
 
         return this.pool[this.poolIndex];
     }

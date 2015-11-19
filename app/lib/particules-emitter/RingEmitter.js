@@ -5,7 +5,7 @@ import NumberUtils from '../../utils/number-utils';
 export default class RingEmitter extends EmitterBase {
 
     /**
-     * @constructor 
+     * @constructor
      * @inherits EmitterBase
      * @param {object} scene - The current scene of Pixi
      * @param {integer} particuleNb - Number of particule to be instancieted
@@ -18,23 +18,6 @@ export default class RingEmitter extends EmitterBase {
 
         this.populate(Ring, 500);
         this.minTrigger = 100;
-    }
-
-    /**
-     * @method
-     * @name throw
-     * @description Instance particules
-     * @param {integer} number - Number of thrown particules
-     */
-    throw(number) {
-        for (let i = 0; i < number; i++) {
-
-            const p = this.takeFromPool();
-
-            this.particles.push(p);
-
-            this.scene.addChild(p);
-        }
     }
 
     /**
@@ -58,7 +41,7 @@ export default class RingEmitter extends EmitterBase {
                 this.particles[i].reset();
 
             } else {
-                
+
 
                 this.particles[i].update(dt, audioData);
             }
