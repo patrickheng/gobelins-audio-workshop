@@ -21,7 +21,7 @@
         this.audioCtx = new AudioContext();
         this.analyser = this.audioCtx.createAnalyser();
 
-        this.analyser.smoothingTimeConstant = 0.9;
+        this.analyser.smoothingTimeConstant = 0.8;
         this.frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
 
         this.biquadFilter = this.audioCtx.createBiquadFilter();

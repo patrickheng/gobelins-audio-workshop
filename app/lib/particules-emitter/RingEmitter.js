@@ -17,7 +17,9 @@ export default class RingEmitter extends EmitterBase {
         this.particlesNumber = particuleNb;
 
         this.populate(Ring, 500);
-        this.minTrigger = 100;
+        this.currentTime = 0;
+        this.minTriggerAmp = 100;
+        this.maxTick = 20;
     }
 
     /**
@@ -28,9 +30,11 @@ export default class RingEmitter extends EmitterBase {
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
+        this.currentTime += dt;
 
-        if(audioData > this.minTrigger) {
+        if(audioData > this.minTriggerAmp && this.currentTime > this.maxTick) {
             this.throw(1);
+            this.currentTime = 0;
         }
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {

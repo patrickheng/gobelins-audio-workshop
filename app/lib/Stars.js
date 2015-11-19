@@ -9,7 +9,7 @@ export default class Stars extends Graphics {
 
         this.scene = scene;
 
-        this.starsNumber = 100;
+        this.starsNumber = 120;
 
         this.velocity = 0.001;
 

@@ -28,19 +28,23 @@ export default class LineEmitter extends EmitterBase {
 
         this.currentTime = 0;
 
-        EventEmitter.once('INTRO_ENDS', this.onIntroEnds.bind(this));
+        this.state = 'INTRO_START';
+
+        EventEmitter.once('INTRO_END', this.onIntroEnds.bind(this));
     }
 
     /**
      * @method
      * @name onIntroEnds
-     * @description Callback after receive INTRO_ENDS event from Timeline class
+     * @description Callback after receive INTRO_END event from Timeline class
      */
     onIntroEnds() {
-        console.log('INTRO_ENDS receive by LineEmitter');
+        console.log('INTRO_END receive by LineEmitter');
 
         this.popFrequency = 1;
-        this.thrownElements = 3;
+        this.thrownElements = 1;
+        this.throw(30)
+        this.state = 'INTRO_END';
     }
 
     /**
@@ -60,29 +64,11 @@ export default class LineEmitter extends EmitterBase {
 
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
-
                 // Remove child
                 this.scene.removeChild(this.particles[i]);
                 this.particles.splice(i,1);
-                // Take a new particules from pool
-                // this.particles[i] = this.takeFromPool();
-
-                // Set new options of the particule
-                // const velocity = {
-                //     x: NumberUtils.randomRange(-3, 3),
-                //     y: NumberUtils.randomRange(-3, 3)
-                // }
-
-                // this.particles[i].reset(velocity);
-
-                // Add the new particule in the scene
-                // this.scene.addChild(this.particles[i]);
-
-
             }
-                this.particles[i].update(dt, audioData);
-
-
+            this.particles[i].update(dt, audioData, this.state);
         }
     }
 }

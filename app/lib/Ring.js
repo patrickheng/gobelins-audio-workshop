@@ -28,7 +28,6 @@ export default class Ring extends Sprite {
         this.scaleVal = 0;
 
         this.texture = PIXI.Texture.fromImage('img/circle-thin.png');
-
     }
 
     /**
@@ -62,7 +61,7 @@ export default class Ring extends Sprite {
             return;
         }
 
-        this.scaleVal += 0.01;
+        this.scaleVal += 0.005 ;
         this.scale.set(this.scaleVal);
         this.life -= dt;
         this.alpha = 1.3 - this.life / 300;

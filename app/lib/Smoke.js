@@ -26,6 +26,9 @@ export default class Smoke extends Sprite {
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
         this.y = Math.sin(this.angle) * 100 + window.innerHeight / 2;
 
+        this.colors = ['0x9b59b6', '0xe74c3c', '0x2ecc71', '0x1abc9c', '0xecf0f1'];
+        this.colorIndex = 0;
+
         this.scaleVal = 0;
         this.rotation = this.angle;
         this.alpha = 0.8;
@@ -59,7 +62,7 @@ export default class Smoke extends Sprite {
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
      */
-    update(dt, audioData) {
+    update(dt, audioData, state) {
 
         if (this.life < 0.2) {
             this.isDead = true;
@@ -74,6 +77,16 @@ export default class Smoke extends Sprite {
         this.scaleVal = audioData / 70;
         this.scale.set(this.scaleVal);
 
+
+        if(state === 'INTRO_END') {
+            this.tint = this.colors[this.colorIndex];
+        }
+        else if(state === 'MAIN_MELODY') {
+            if(audioData > 200)
+                this.colorIndex = (this.colorIndex >= this.colors.length -1) ? 0 : this.colorIndex + 1;
+
+                this.tint = this.colors[this.colorIndex];
+        }
     }
 
 }

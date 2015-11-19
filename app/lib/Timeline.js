@@ -17,7 +17,8 @@ class Timeline {
 
     // Timeline flags
     this.flags = {
-      introEnds: false,
+      introEnd: false,
+      mainMelody: false,
     }
 
 
@@ -36,9 +37,13 @@ class Timeline {
     // Update timecode for debugging
     this.timecode.innerText = this.currentTime;
 
-    if(this.currentTime > Constant.INTRO_ENDS && !this.flags.introEnds) {
-      this.flags.introEnds = true;
-      EventEmitter.emit('INTRO_ENDS');
+    if(this.currentTime > Constant.INTRO_END && !this.flags.introEnd) {
+      this.flags.introEnd = true;
+      EventEmitter.emit('INTRO_END');
+    }
+    else if(this.currentTime > Constant.MAIN_MELODY && !this.flags.mainMelody) {
+      this.flags.mainMelody = true;
+      EventEmitter.emit('MAIN_MELODY');
     }
 
   }

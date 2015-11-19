@@ -14,6 +14,7 @@ export default class EmmiterBase {
         this.poolIndex = 0;
         this.pool = [];
         this.particles = [];
+        this.state = 'INTRO_START';
     }
 
     /**

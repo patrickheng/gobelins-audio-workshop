@@ -22,7 +22,8 @@ export default class SmokeEmitter extends EmitterBase {
 
         this.throw(this.particlesNumber);
 
-        EventEmitter.once('INTRO_ENDS', this.onIntroEnds.bind(this));
+        EventEmitter.once('INTRO_END', this.onIntroEnds.bind(this));
+        EventEmitter.once('MAIN_MELODY', this.onMainMelody.bind(this));
 
         this.currentTime = 0;
     }
@@ -30,11 +31,22 @@ export default class SmokeEmitter extends EmitterBase {
     /**
      * @method
      * @name onIntroEnds
-     * @description Callback after receive INTRO_ENDS event from Timeline class
+     * @description Callback after receive INTRO_END event from Timeline class
      */
     onIntroEnds() {
+        console.log('INTRO_END receive by SmokeEmitter');
         this.throw(30);
-        this.tintParticules();
+        this.state = 'INTRO_END'
+    }
+
+    /**
+     * @method
+     * @name onMainMelody
+     * @description Callback after receive MAIN_MELODY event from Timeline class
+     */
+    onMainMelody() {
+        console.log('MAIN_MELODY receive by SmokeEmitter');
+        this.state = 'MAIN_MELODY'
     }
 
     /**
@@ -43,7 +55,7 @@ export default class SmokeEmitter extends EmitterBase {
      * @description Set color to the current smoke
      * @param {integer} color - Tint color
      */
-    tintPartiules(color) {
+    tintParticles(color) {
         for (var i = 0; i < this.particles.length; i++) {
             this.particles[i].tint = color;
         }
@@ -56,13 +68,9 @@ export default class SmokeEmitter extends EmitterBase {
      * @param {float} ct - CurentTime of the played soud
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
+     * @param {string} state - Part of the song
      */
     update(ct, dt, audioData) {
-        // this.currentTime += dt;
-        //
-        // if(this.currentTime > 100) {
-        //     this.currentTime = 0;
-        // }
 
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
@@ -85,7 +93,7 @@ export default class SmokeEmitter extends EmitterBase {
                 this.scene.addChild(this.particles[i]);
 
             } else {
-                this.particles[i].update(dt, audioData);
+                this.particles[i].update(dt, audioData, this.state);
             }
         }
     }

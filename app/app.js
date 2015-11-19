@@ -42,7 +42,7 @@ class App {
         root.appendChild(this.scene.renderer.view);
 
         // Child of the scene
-        this.smokeEmitter = new SmokeEmitter(this.scene, 10);
+        this.smokeEmitter = new SmokeEmitter(this.scene, 5);
         this.lineEmitter = new LineEmitter(this.scene, 10);
         this.triangleEmitter = new TriangleEmitter(this.scene, 30);
         this.ringEmitter = new RingEmitter(this.scene);
@@ -128,7 +128,7 @@ class App {
 
         // Update children
         this.smokeEmitter.update(currentTime, this.DELTA_TIME, audioData[5]);
-        this.lineEmitter.update(currentTime, this.DELTA_TIME, audioData[10]);
+        this.lineEmitter.update(currentTime, this.DELTA_TIME, audioData[48]);
         this.ringEmitter.update(this.DELTA_TIME, audioData[32]);
         this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
         this.stars.update(averageAudioData);

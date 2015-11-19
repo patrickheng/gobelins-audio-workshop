@@ -19,8 +19,8 @@ export default class Line extends Sprite {
         this.isDead = false;
 
         this.velocity = {
-            x: NumberUtils.randomRange(-10, 10),
-            y: NumberUtils.randomRange(-10, 10)
+            x: NumberUtils.randomRange(-2, 2),
+            y: NumberUtils.randomRange(-2, 2)
         };
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
@@ -45,6 +45,7 @@ export default class Line extends Sprite {
         this.isDead = false;
 
         this.scaleVal = 0;
+        this.scale.set(this.scaleVal);
 
         this.angle = NumberUtils.randomRange(-Math.PI, Math.PI);
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
@@ -58,27 +59,28 @@ export default class Line extends Sprite {
      * @description Update called by a request animation frame
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
+     * @param {string} state - Current part of the song
      */
-    update(dt, audioData) {
-        
+    update(dt, audioData, state) {
 
         if (this.life < 0.2) {
             this.isDead = true;
             return;
         }
 
-        this.scaleVal = audioData / 50;
         this.alpha = 1 - this.life / this.baseLife - 0.3;
         this.life -= dt;
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
+        this.y += this.velocity.y * audioData / 20;
 
-        if(audioData > 100) {
-            this.y += this.velocity.y * audioData / 10;
-        } else {
-            this.y += this.velocity.y * audioData / 25;
+        if(state === 'INTRO_START') {
+            this.scaleVal = audioData / 50;
         }
-
+        else {
+            this.scaleVal = audioData / 35;
+        }
+        
         this.scale.set(this.scaleVal);
 
     }
