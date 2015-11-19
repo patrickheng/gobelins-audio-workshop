@@ -41,6 +41,8 @@ export default class EmmiterBase {
 
             const p = this.takeFromPool();
 
+            p.reset();
+
             this.particles.push(p);
 
             this.scene.addChild(p);

@@ -5,7 +5,7 @@ import NumberUtils from '../utils/number-utils';
 export default class Octogone extends Sprite {
 
     /**
-     * @constructor 
+     * @constructor
      * @param {object} options - Options of the particule
      */
     constructor(options) {
@@ -19,7 +19,7 @@ export default class Octogone extends Sprite {
         this.alpha = 0.2;
 
         this.x = NumberUtils.randomRange(0, window.innerWidth);
-        
+
         this.y = NumberUtils.randomRange(0, window.innerHeight);
 
         this.scaleVal = 0;
@@ -62,7 +62,7 @@ export default class Octogone extends Sprite {
         }
 
         this.scaleVal += 0.015;
-        this.scale.set(this.scaleVal); 
+        this.scale.set(this.scaleVal);
         this.life -= dt;
         this.alpha = 1 - this.life / 300;
     }

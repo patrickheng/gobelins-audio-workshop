@@ -1,12 +1,13 @@
 import Scene from './scene/scene';
-import AudioW from './lib/Audio'
+import AudioW from './lib/Audio';
+import Timeline from './lib/Timeline';
 import NumberUtils from './utils/number-utils';
 import RingEmitter from './lib/particules-emitter/RingEmitter';
 import SmokeEmitter from './lib/particules-emitter/SmokeEmitter';
 import LineEmitter from './lib/particules-emitter/LineEmitter';
 import OctogoneEmitter from './lib/particules-emitter/OctogoneEmitter';
+import TriangleEmitter from './lib/particules-emitter/TriangleEmitter';
 import Stars from './lib/Stars';
-
 
 // Only dev
 import Dat from 'dat-gui';
@@ -32,14 +33,18 @@ class App {
         // Init base classes
         this.scene = new Scene();
         this.audio = new AudioW('/audio/Ueno.mp3');
+        this.toggleAudio = true;
+
+        this.timeline = new Timeline(this.audio.audioEl);
 
         // Render pixi view
         let root = document.body.querySelector('.app');
         root.appendChild(this.scene.renderer.view);
 
-        // Child of scene
-        this.smokeEmitter = new SmokeEmitter(this.scene, 50);
-        this.lineEmitter = new LineEmitter(this.scene, 50);
+        // Child of the scene
+        this.smokeEmitter = new SmokeEmitter(this.scene, 10);
+        this.lineEmitter = new LineEmitter(this.scene, 10);
+        this.triangleEmitter = new TriangleEmitter(this.scene, 30);
         this.ringEmitter = new RingEmitter(this.scene);
         this.octogoneEmitter = new OctogoneEmitter(this.scene);
         this.stars = new Stars(this.scene);
@@ -84,7 +89,13 @@ class App {
      */
     addGui() {
         this.gui = new Dat.GUI();
-        this.gui.add(this.audio.audioEl, 'currentTime').min(0).max(240).step(10).name('go to time');
+        this.gui.add(this.audio.audioEl, 'currentTime').min(0).max(240).step(1).name('go to time');
+        this.gui.add(this, 'toggleAudio').name('Toggle audio').onChange((toggle) => {
+            if(toggle)
+                this.audio.audioEl.play();
+            else
+                this.audio.audioEl.pause();
+        });
     }
 
     /**
@@ -113,15 +124,22 @@ class App {
         // Get audio data
         const audioData = this.audio.getFrequencyBars(50, 400);
         const averageAudioData = this.audio.getAverageFrequency();
+        const currentTime = this.audio.audioEl.currentTime;
 
         // Update children
-        this.ringEmitter.update(this.DELTA_TIME, audioData[30]);
-        this.smokeEmitter.update(this.DELTA_TIME, audioData[30]);
-        this.lineEmitter.update(this.DELTA_TIME, audioData[10]);
+        this.smokeEmitter.update(currentTime, this.DELTA_TIME, audioData[5]);
+        this.lineEmitter.update(currentTime, this.DELTA_TIME, audioData[10]);
+        this.ringEmitter.update(this.DELTA_TIME, audioData[32]);
         this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
-
         this.stars.update(averageAudioData);
 
+
+        // if(currentTime > 33) {
+        //     this.lineEmitter.popFrequency = 1;
+        //     this.lineEmitter.thrownElements = 10;
+        //     if(this.smokeEmitter.particules <= (50) {
+        //     }
+        // }
         // Render
         this.scene.render();
 

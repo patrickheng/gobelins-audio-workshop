@@ -22,7 +22,7 @@ export default class RingEmitter extends EmitterBase {
 
     /**
      * @method
-     * @name reset
+     * @name update
      * @description Update called by a request animation frame
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter

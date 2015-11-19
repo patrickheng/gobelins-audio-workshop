@@ -1,4 +1,6 @@
+import Constant from '../../config/constant';
 import EmitterBase from './EmitterBase';
+import EventEmitter from '../EventEmitter';
 import Smoke from '../Smoke';
 import NumberUtils from '../../utils/number-utils';
 
@@ -19,16 +21,49 @@ export default class SmokeEmitter extends EmitterBase {
         this.populate(Smoke, 1000);
 
         this.throw(this.particlesNumber);
+
+        EventEmitter.once('INTRO_ENDS', this.onIntroEnds.bind(this));
+
+        this.currentTime = 0;
     }
 
     /**
      * @method
-     * @name reset
+     * @name onIntroEnds
+     * @description Callback after receive INTRO_ENDS event from Timeline class
+     */
+    onIntroEnds() {
+        this.throw(30);
+        this.tintParticules();
+    }
+
+    /**
+     * @method
+     * @name tintPartiules
+     * @description Set color to the current smoke
+     * @param {integer} color - Tint color
+     */
+    tintPartiules(color) {
+        for (var i = 0; i < this.particles.length; i++) {
+            this.particles[i].tint = color;
+        }
+    }
+
+    /**
+     * @method
+     * @name update
      * @description Update called by a request animation frame
+     * @param {float} ct - CurentTime of the played soud
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
      */
-    update(dt, audioData) {
+    update(ct, dt, audioData) {
+        // this.currentTime += dt;
+        //
+        // if(this.currentTime > 100) {
+        //     this.currentTime = 0;
+        // }
+
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
 

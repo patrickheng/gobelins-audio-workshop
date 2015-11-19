@@ -1,8 +1,8 @@
 import EmitterBase from './EmitterBase';
-import Octogone from '../Octogone';
+import Triangle from '../Triangle';
 import NumberUtils from '../../utils/number-utils';
 
-export default class OctogoneEmitter extends EmitterBase {
+export default class TriangleEmitter extends EmitterBase {
 
     /**
      * @constructor
@@ -16,8 +16,9 @@ export default class OctogoneEmitter extends EmitterBase {
         this.scene = scene;
         this.particlesNumber = particuleNb;
 
-        this.populate(Octogone, 500);
-        this.minTrigger = 150;
+        this.populate(Triangle, 1000);
+
+        this.throw(this.particlesNumber);
     }
 
     /**
@@ -28,24 +29,29 @@ export default class OctogoneEmitter extends EmitterBase {
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
-
-        if(audioData > this.minTrigger) {
-            this.throw(1);
-        }
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isDead) {
 
                 // Remove child
                 this.scene.removeChild(this.particles[i]);
 
-                this.particles[i].reset();
+                // Take a new particules from pool
+                this.particles[i] = this.takeFromPool();
+
+                // Set new options of the particule
+                const velocity = {
+                    x: NumberUtils.randomRange(-3, 3),
+                    y: NumberUtils.randomRange(-3, 3)
+                }
+
+                this.particles[i].reset(velocity);
+
+                // Add the new particule in the scene
+                this.scene.addChild(this.particles[i]);
 
             } else {
-
-
                 this.particles[i].update(dt, audioData);
             }
-
         }
     }
 }

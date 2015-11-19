@@ -5,7 +5,7 @@ import NumberUtils from '../utils/number-utils';
 export default class Ring extends Sprite {
 
     /**
-     * @constructor 
+     * @constructor
      * @param {object} options - Options of the particule
      */
     constructor(options) {
@@ -21,15 +21,13 @@ export default class Ring extends Sprite {
             y: NumberUtils.randomRange(-3, 3)
         };
 
-        this.textures = ['img/circle-thin.png'];
-
         this.x = NumberUtils.randomRange(0, window.innerWidth);
-        
+
         this.y = NumberUtils.randomRange(0, window.innerHeight);
 
         this.scaleVal = 0;
 
-        this.texture = PIXI.Texture.fromImage(this.textures[0]);
+        this.texture = PIXI.Texture.fromImage('img/circle-thin.png');
 
     }
 
@@ -48,8 +46,6 @@ export default class Ring extends Sprite {
         this.angle = NumberUtils.randomRange(-Math.PI, Math.PI);
         this.x = NumberUtils.randomRange(0, window.innerWidth);
         this.y = NumberUtils.randomRange(0, window.innerHeight);
-
-
     }
 
     /**
@@ -66,10 +62,10 @@ export default class Ring extends Sprite {
             return;
         }
 
-        this.scaleVal += 0.02;
-        this.scale.set(this.scaleVal); 
+        this.scaleVal += 0.01;
+        this.scale.set(this.scaleVal);
         this.life -= dt;
-        this.alpha = 1 - this.life / 300;
+        this.alpha = 1.3 - this.life / 300;
     }
 
 }

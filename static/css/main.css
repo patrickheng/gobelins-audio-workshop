@@ -5,3 +5,12 @@ body,html {
 	padding:0;
 	overflow:hidden;
 }
+
+#timecode {
+	position: absolute;
+	left: 10px;
+	top: 60px;
+	color: #FFFFFF;
+	font-size: 10px;
+	z-index: 2;
+}

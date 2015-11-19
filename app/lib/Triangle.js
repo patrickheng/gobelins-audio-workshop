@@ -2,7 +2,7 @@ import {Sprite} from 'pixi.js';
 import NumberUtils from '../utils/number-utils';
 
 
-export default class Smoke extends Sprite {
+export default class Triangle extends Sprite {
 
     /**
      * @constructor
@@ -19,19 +19,16 @@ export default class Smoke extends Sprite {
         this.isDead = false;
 
         this.velocity = {
-            x: NumberUtils.randomRange(-3, 3),
-            y: NumberUtils.randomRange(-3, 3)
+            x: NumberUtils.randomRange(-10, 10),
+            y: NumberUtils.randomRange(-10, 10)
         };
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
         this.y = Math.sin(this.angle) * 100 + window.innerHeight / 2;
-
+        this.alpha = 0;
         this.scaleVal = 0;
         this.rotation = this.angle;
-        this.alpha = 0.8;
-
-        // this.texture = PIXI.Texture.fromImage(this.textures[Math.floor(Math.random() * this.textures.length)]);
-        this.texture = PIXI.Texture.fromImage('img/cloud700.png');
+        this.texture = PIXI.Texture.fromImage('img/triangle.png');
     }
 
     /**
@@ -46,6 +43,8 @@ export default class Smoke extends Sprite {
         this.isDead = false;
 
         this.scaleVal = 0;
+        this.rotationSpeed = 0.01;
+        this.alpha = 0;
 
         this.angle = NumberUtils.randomRange(-Math.PI, Math.PI);
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2;
@@ -54,25 +53,30 @@ export default class Smoke extends Sprite {
 
     /**
      * @method
-     * @name reset
+     * @name update
      * @description Update called by a request animation frame
      * @param {float} dt - Delta time between two update
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
 
+        if(audioData > 100) {
+            this.scaleVal = audioData / 100;
+        } else {
+            this.scaleVal = audioData / 200;
+            this.alpha = 1 - this.life / this.baseLife - 0.4;
+        }
+
         if (this.life < 0.2) {
             this.isDead = true;
             return;
         }
-        this.life -= dt;
 
-        this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
-        this.y += this.velocity.y;
-
-        this.alpha = 1 - this.life / this.baseLife - 0.3;
-        this.scaleVal = audioData / 70;
         this.scale.set(this.scaleVal);
+        this.life -= dt;
+        this.alpha = 1 - this.life / this.baseLife - 0.7;
+        this.rotation += this.rotationSpeed;
+
 
     }
 
