@@ -2,7 +2,6 @@
 
 It's a student exercice made at Gobelins. 
 We had 3 days for using Pixi.js + the web audio api to make a creative animation.
-The workshop was lead by @williammapan.
 
 #### Technologies :
 
