@@ -63,6 +63,7 @@ export default class Smoke extends Sprite {
      */
     update(dt, audioData, state) {
 
+        // Set dead particule when life is not enough
         if (this.life < 0.2) {
             this.isDead = true;
             return;
@@ -76,7 +77,7 @@ export default class Smoke extends Sprite {
         this.scaleVal = audioData / 70;
         this.scale.set(this.scaleVal);
 
-
+        // Change properties depending on music current state
         if(state === 'INTRO_START') {
             this.alpha = 0.2;
         }

@@ -21,7 +21,6 @@ class Timeline {
       mainMelody: false,
     }
 
-
     // Add timeupdate listener
     audio.addEventListener("timeupdate", this.update.bind(this));
   }

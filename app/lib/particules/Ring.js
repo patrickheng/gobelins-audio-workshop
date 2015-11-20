@@ -56,16 +56,17 @@ export default class Ring extends Sprite {
      * @param {float} audioData - Audio data senf from emitter
      */
     update(dt, audioData) {
-
+        // Set dead particule when life is not enough
         if (this.life < 0.2) {
             this.isDead = true;
             return;
         }
 
+        // Change color depending on audioData value
         if(audioData < 100) {
             this.tint = 0x1abc9c;
         } else {
-            this.tint = 0xc0392b;
+            this.tint = 0x1abc9c;
         }
 
         this.scaleVal += 0.005 ;

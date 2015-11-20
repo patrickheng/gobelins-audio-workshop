@@ -62,7 +62,8 @@ export default class Line extends Sprite {
      * @param {string} state - Current part of the song
      */
     update(dt, audioData, state) {
-
+        
+        // Set dead particule when life is not enough
         if (this.life < 0.2) {
             this.isDead = true;
             return;
@@ -73,6 +74,7 @@ export default class Line extends Sprite {
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
 
+        // Changing velocity when music get stronger
         if(audioData < 95) {
             this.y += this.velocity.y * audioData / 20;
         } else {
@@ -80,7 +82,7 @@ export default class Line extends Sprite {
             this.x += 1;
         }
 
-        // this.rotation += audioData / 10000;
+        // Change properties depending on music current state
         if(state === 'INTRO_START') {
             this.scaleVal = audioData / 50;
         }

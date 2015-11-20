@@ -55,6 +55,7 @@ export default class Octogone extends Sprite {
      */
     update(dt, audioData) {
 
+        // Set dead particule when life is not enough
         if (this.life < 0.2) {
             this.isDead = true;
             return;

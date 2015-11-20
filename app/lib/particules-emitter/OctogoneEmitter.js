@@ -42,7 +42,6 @@ export default class OctogoneEmitter extends EmitterBase {
 
             } else {
 
-
                 this.particles[i].update(dt, audioData);
             }
 
