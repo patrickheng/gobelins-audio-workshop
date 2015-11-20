@@ -95,6 +95,7 @@ class App {
             else
                 this.audio.audioEl.pause();
         });
+        this.gui.close();
     }
 
     /**
