@@ -9,7 +9,7 @@
     "build": "browserify -t [ babelify ] app/ -o static/js/main.js && uglifyjs --screw-ie8 static/js/main.js -c -o static/js/main.js",
     "watch": "watchify -d -t [ babelify ] app/ -o static/js/main.js"
   },
-  "author": "William Mapan",
+  "author": "Patrick HENG",
   "license": "ISC",
   "dependencies": {
     "dat-gui": "^0.5.0",
