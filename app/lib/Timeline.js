@@ -35,7 +35,7 @@ class Timeline {
     this.currentTime = this.audio.currentTime;
 
     // Update timecode for debugging
-    if(Constant.ENV === 'DEV') {
+    if(Constant.ENV == 'DEV') {
       this.timecode.innerText = this.currentTime;
     }
 

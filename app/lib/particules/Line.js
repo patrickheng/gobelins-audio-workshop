@@ -73,7 +73,7 @@ export default class Line extends Sprite {
 
         this.x = Math.cos(this.angle) * 100 + window.innerWidth / 2 + this.velocity.x;
 
-        if(audioData < 80) {
+        if(audioData < 95) {
             this.y += this.velocity.y * audioData / 20;
         } else {
             this.y += this.velocity.y * audioData / 5;

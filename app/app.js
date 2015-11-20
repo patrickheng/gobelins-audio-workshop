@@ -21,8 +21,6 @@ class App {
      */
     constructor() {
 
-        this.ENV = 'DEV';
-
         // Calculate time
         this.DELTA_TIME = 0;
         this.LAST_TIME = Date.now();
@@ -55,9 +53,11 @@ class App {
         this.addListeners();
 
         this.statsReady = false;
+        
+        console.log(Constant.ENV);
 
         // Init dev tools
-        if(this.ENV === 'DEV') {
+        if(Constant.ENV == 'DEV') {
           this.addStats();
           this.addGui();
         }
@@ -115,7 +115,7 @@ class App {
      * @description Update
      */
     update() {
-        if (this.statsReady)
+        if (this.statsReady && Constant.ENV === 'DEV')
             this.stats.begin();
 
         this.DELTA_TIME = Date.now() - this.LAST_TIME;
@@ -136,7 +136,7 @@ class App {
         // Render
         this.scene.render();
 
-        if (this.statsReady)
+        if (this.statsReady && Constant.ENV === 'DEV')
             this.stats.end();
     }
 
