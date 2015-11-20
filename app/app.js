@@ -8,6 +8,7 @@ import LineEmitter from './lib/particules-emitter/LineEmitter';
 import OctogoneEmitter from './lib/particules-emitter/OctogoneEmitter';
 import Stars from './lib/particules/Stars';
 import Constant from './config/Constant';
+import raf from 'raf';
 
 // Only dev
 import Dat from 'dat-gui';
@@ -52,8 +53,11 @@ class App {
 
         this.addListeners();
 
+        // Launch raf
+        this.update();
+
         this.statsReady = false;
-        
+
         console.log(Constant.ENV);
 
         // Init dev tools
@@ -106,7 +110,10 @@ class App {
     addListeners() {
 
         window.addEventListener('resize', this.onResize.bind(this));
-        TweenMax.ticker.addEventListener('tick', this.update.bind(this));
+
+        // If tweenmax is used, prefer this method to raf
+        // TweenMax.ticker.addEventListener('tick', this.update.bind(this));
+
     }
 
     /**
@@ -138,6 +145,8 @@ class App {
 
         if (this.statsReady && Constant.ENV === 'DEV')
             this.stats.end();
+
+        raf(this.update.bind(this));
     }
 
     /**
