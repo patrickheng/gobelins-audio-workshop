@@ -138,15 +138,13 @@ class App {
         this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
         this.stars.update(averageAudioData);
 
-        raf(this.update.bind(this));
-
         // Render
         this.scene.render();
 
-
+        raf(this.update.bind(this));
+        
         if (this.statsReady && Constant.ENV === 'DEV')
             this.stats.end();
-
     }
 
     /**
