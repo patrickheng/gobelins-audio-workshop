@@ -1,7 +1,15 @@
 # Gobelins audio workshop 2015
 
 It's a student exercice made at Gobelins. 
+
 We had 3 days for using Pixi.js + the web audio api to make a creative animation.
+
+The workshop was led by [William Mapan](https://twitter.com/williamapan).
+
+Demo available [here](http://lab.hengpatrick.fr/gobelins-workshop-audio/).
+
+
+![Preview](http://lab.hengpatrick.fr/gobelins-workshop-audio/preview.gif)
 
 #### Technologies :
 
@@ -9,6 +17,7 @@ We had 3 days for using Pixi.js + the web audio api to make a creative animation
 * Browserify
 * Babel / ES2015
 * Web Audio Api
+* EventEmitter
 
 
 
@@ -34,3 +43,7 @@ Build for production :
 ```shell
   npm run build
 ```
+
+
+
+Hope you like it <3
