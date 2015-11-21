@@ -22,7 +22,7 @@ class Timeline {
     }
 
     // Add timeupdate listener
-    audio.addEventListener("timeupdate", this.update.bind(this));
+    // audio.addEventListener("timeupdate", this.update.bind(this));
   }
 
   /**

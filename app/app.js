@@ -58,8 +58,6 @@ class App {
 
         this.statsReady = false;
 
-        console.log(Constant.ENV);
-
         // Init dev tools
         if(Constant.ENV == 'DEV') {
           this.addStats();
@@ -140,13 +138,15 @@ class App {
         this.octogoneEmitter.update(this.DELTA_TIME, audioData[1]);
         this.stars.update(averageAudioData);
 
+        raf(this.update.bind(this));
+
         // Render
         this.scene.render();
+
 
         if (this.statsReady && Constant.ENV === 'DEV')
             this.stats.end();
 
-        raf(this.update.bind(this));
     }
 
     /**
