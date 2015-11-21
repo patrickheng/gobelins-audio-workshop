@@ -22,7 +22,7 @@ class Timeline {
     }
 
     // Add timeupdate listener
-    // audio.addEventListener("timeupdate", this.update.bind(this));
+    audio.addEventListener("timeupdate", this.update.bind(this));
   }
 
   /**
@@ -34,9 +34,9 @@ class Timeline {
     this.currentTime = this.audio.currentTime;
 
     // Update timecode for debugging
-    if(Constant.ENV == 'DEV') {
-      this.timecode.innerText = this.currentTime;
-    }
+    // if(Constant.ENV == 'DEV') {
+    //   this.timecode.innerText = this.currentTime;
+    // }
 
     if(this.currentTime > Constant.INTRO_END && !this.flags.introEnd) {
       this.flags.introEnd = true;
