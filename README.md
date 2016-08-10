@@ -6,10 +6,10 @@ We had 3 days for using Pixi.js + the web audio api to make a creative animation
 
 The workshop was led by [William Mapan](https://twitter.com/williamapan).
 
-Demo available [here](http://lab.hengpatrick.fr/gobelins-workshop-audio/).
+Demo available [here](http://lab.hengpatrick.fr/2016/gobelins-workshop-audio/).
 
 
-![Preview](http://lab.hengpatrick.fr/gobelins-workshop-audio/preview.gif)
+![Preview](http://lab.hengpatrick.fr/2016/gobelins-workshop-audio/preview.gif)
 
 #### Technologies :
 
